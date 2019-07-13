@@ -5,13 +5,13 @@ const GRIDSIZE = 500;
 // Add button event for setting cell color attribute
 var button = document.getElementById("colorButton");
 button.addEventListener('click', (event) => {
-	if (event.target.textContent === 'Random') {
-		button.textContent = 'Black';
-		colorType = () => {return 'black'};
-	} else {
-		button.textContent = 'Random';
-		colorType = randomColor;
-	}
+  if (event.target.textContent === 'Random') {
+    button.textContent = 'Black';
+    colorType = () => {return 'black'};
+  } else {
+    button.textContent = 'Random';
+    colorType = randomColor;
+  }
 })
 
 /**
@@ -20,7 +20,7 @@ button.addEventListener('click', (event) => {
  * @return {string} Random hex color
  */
 var randomColor = function() {
-	return "#"+((1<<24)*Math.random()|0).toString(16)
+  return "#"+((1<<24)*Math.random()|0).toString(16)
 }
 
 /**
@@ -29,10 +29,10 @@ var randomColor = function() {
  */
 var reset = document.getElementById('resetButton')
 reset.addEventListener('click', () => {
-	var size = prompt("Enter grid size: ");
-	size = size > 0 ? size : 16
-	clearGrid();
-	setGrid(size);
+  var size = prompt("Enter grid size: ");
+  size = size > 0 ? size : 16
+  clearGrid();
+  setGrid(size);
 })
 
 /**
@@ -40,8 +40,8 @@ reset.addEventListener('click', () => {
  */
 var clearGrid = function() {
   while (divs[0].firstChild) {
-		divs[0].removeChild(divs[0].firstChild);
-	}
+    divs[0].removeChild(divs[0].firstChild);
+  }
 }
 
 /**
@@ -53,15 +53,15 @@ var clearGrid = function() {
  */
 var setElements = function(row, size) 
 {
-	col = document.createElement("div");
-	col.style.borderColor = 'rgba(0, 0, 0, 0.05)';
-	col.style.height=`${size}px`;
-	col.style.width=`${size}px`;
-	col.style.borderStyle = "solid";
-	col.style.borderWidth="1px";
-	col = setElementColor(col)
-	row.appendChild(col);
-	return row;
+  col = document.createElement("div");
+  col.style.borderColor = 'rgba(0, 0, 0, 0.05)';
+  col.style.height=`${size}px`;
+  col.style.width=`${size}px`;
+  col.style.borderStyle = "solid";
+  col.style.borderWidth="1px";
+  col = setElementColor(col)
+  row.appendChild(col);
+  return row;
 }
 
 /**
@@ -70,10 +70,10 @@ var setElements = function(row, size)
  * @param {Object} The div cell
  */
 var setElementColor = function(cell) {
-	cell.addEventListener('mousemove', (event) =>{
-	  event.target.style.backgroundColor = colorType();
-	})
-	return cell;
+  cell.addEventListener('mousemove', (event) =>{
+    event.target.style.backgroundColor = colorType();
+  })
+  return cell;
 }
 
 /**
@@ -82,17 +82,17 @@ var setElementColor = function(cell) {
  * @param {Number} The number of grid cells as sqrt
  */
 var setGrid = function (size) {
-	var cellSize = parseInt(GRIDSIZE / size); 
-	for (let i = 0; i < size; i++) 
-		{
-			row = document.createElement("div");
-			for (let j = 0; j < size; j++) 
-				{
-					row = setElements(row, cellSize)
-				}
-			divs[0].appendChild(row);
-		}
-	}
+  var cellSize = parseInt(GRIDSIZE / size); 
+  for (let i = 0; i < size; i++) 
+    {
+      row = document.createElement("div");
+      for (let j = 0; j < size; j++) 
+        {
+          row = setElements(row, cellSize)
+        }
+      divs[0].appendChild(row);
+    }
+  }
 
 setGrid(16);
 
